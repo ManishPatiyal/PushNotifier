@@ -1,0 +1,30 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from APNPusherService WSDL service -->
+
+  <service name="APNPusher" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://applepushnotificationgenerator"/>
+      <parameter name="wsdlServiceElement" value="APNPusherService"/>
+      <parameter name="schemaQualified" value="http://applepushnotificationgenerator"/>
+      <parameter name="wsdlServicePort" value="APNPusher"/>
+      <parameter name="className" value="applepushnotificationgenerator.APNPusherSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="APNPusher"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="APNPusherCall" qname="operNS:APNPusherCall" xmlns:operNS="http://applepushnotificationgenerator" soapAction="" >
+        <parameter qname="pns:domainName" xmlns:pns="http://applepushnotificationgenerator" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:userId" xmlns:pns="http://applepushnotificationgenerator" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="APNPusherCall"/>
+
+  </service>
+</deployment>
